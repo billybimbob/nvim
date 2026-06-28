@@ -6,19 +6,30 @@ vim.pack.add({
 
 local nvim_treesitter = require('nvim-treesitter')
 
-local extra_langs = { 
+local extra_langs = {
 	'html',
 	'css',
 	'scss',
 	'typescript',
-	'tsx', 
-	'vue', 
+	'tsx',
+	'vue',
+	'git_config',
+	'git_rebase',
+	'gitattributes',
+	'gitcommit',
+	'gitignore',
 	'go',
-	'json', 
+	'gomod',
+	'gosum',
+	'gotmpl',
+	'gowork',
+	'json',
 	'yaml',
 	'sql',
-	'c_sharp', 
-	'python' 
+	'c_sharp',
+	'powershell',
+	'python',
+	'editorconfig'
 }
 
 nvim_treesitter.install(extra_langs)

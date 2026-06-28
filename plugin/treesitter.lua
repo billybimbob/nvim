@@ -32,6 +32,13 @@ local extra_langs = {
 	'editorconfig'
 }
 
+-- need to have a c complier to add the extra langs
+-- getting c on windows was... tough
+-- easiest way i have found was using a prebuilt version of winlibs:
+-- https://winlibs.com/
+-- 1. winget install BrechtSanders.WinLibs.POSIX.UCRT (this is on windows 11)
+-- 2. add CC = gcc in the path
+
 nvim_treesitter.install(extra_langs)
 
 vim.api.nvim_create_autocmd('FileType', {

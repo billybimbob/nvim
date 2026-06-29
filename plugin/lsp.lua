@@ -7,6 +7,10 @@ vim.lsp.config('lua_ls', {
 		Lua = {
 			diagnostics = {
 				globals = { 'vim' }
+			},
+			workspace = {
+				library = vim.api.nvim_get_runtime_file('', true),
+				checkThirdParty = false
 			}
 		}
 	}
@@ -30,23 +34,51 @@ vim.lsp.config('ts_ls', {
 	filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
 })
 
-
-vim.lsp.config('vue_ls', {})
-
 vim.lsp.enable({
-	'lua_ls', -- lua-language-server
-	'roslyn_ls', -- roslyn-language-server
-
 	'html', -- html-lsp
 	'cssls', -- css-lsp
-
 	'jsonls', -- json-lsp
 	'ts_ls',  -- typescript language server
-	'vue_ls', -- vue-language-server
 	'eslint', -- eslint-lsp
+})
 
-	-- 'gopls',
-	'postgres_lsp', -- postgres-language-server
+-- vim.lsp.enable('vue_ls') -- vue-language-server
+
+vim.lsp.enable('lua_ls') -- lua-language-server
+-- vim.lsp.enable('pyright')
+-- vim.lsp.enable('gopls')
+vim.lsp.enable('postgres_lsp') -- postgres-language-server
+
+vim.lsp.enable({
+	'roslyn_ls', -- roslyn-language-server
 	'powershell_es', -- powershell-editor-services
-	'pyright', -- pyright
+})
+
+vim.opt.completeopt = { "menuone", "noselect", "popup" }
+
+local extra_triggers = {}
+for i = 32, 126 do
+	local s = string.char(i)
+	if s:match('[_%a]$') then
+		table.insert(extra_triggers, s)
+	end
+end
+
+vim.api.nvim_create_autocmd('LspAttach', {
+	group = vim.api.nvim_create_augroup('custom.lsp', {}),
+	callback = function(ev)
+		local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
+
+		if client:supports_method('textDocument/completion') then
+			local triggers = assert(client.server_capabilities.completionProvider.triggerCharacters)
+			vim.list_extend(triggers, extra_triggers)
+
+			vim.lsp.completion.enable(true, client.id, ev.buf, {
+				autotrigger = true,
+				convert = function(item)
+					return { abbr = item.label:gsub('%b()', '') }
+				end
+			})
+		end
+	end
 })

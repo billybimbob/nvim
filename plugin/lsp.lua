@@ -12,38 +12,42 @@ vim.lsp.config('lua_ls', {
 	}
 })
 
-local vue_language_server_path = vim.fn.expand '$MASON/packages' .. '/vue-language-server' .. '/node_modules/@vue/language-server'
+local vue_language_server_path = vim.fn.expand '$MASON\\packages' .. '\\vue-language-server' .. '\\node_modules\\@vue\\language-server'
+
+local vue_plugin = {
+	name = '@vue/typescript-plugin',
+	location = vue_language_server_path,
+	languages = { 'vue' },
+	configNamespace = 'typescript'
+}
 
 vim.lsp.config('vtsls', {
-	filetypes = { 'typescript', 'javascript', 'javscriptreact', 'typescriptreact', 'vue' },
 	settings = {
 		vtsls = {
 			tsserver = {
 				globalPlugins = {
-					vue_plugin= {
-						name = '@vue/typescript-plugin',
-						location = vue_language_server_path,
-						languages = { 'vue' },
-						configNamespace = 'typescript'
-					}
+					vue_plugin,
 				}
 			}
 		}
-	}
+	},
+	filetypes = { 'typescript', 'javascript', 'javscriptreact', 'typescriptreact', 'vue' },
 })
 
-vim.lsp.enable('lua_ls') -- lua-language-server
-vim.lsp.enable('roslyn_ls') -- roslyn-language-server
+vim.lsp.enable({
+	'lua_ls', -- lua-language-server
+	'roslyn_ls', -- roslyn-language-server
 
-vim.lsp.enable('html') -- html-lsp
-vim.lsp.enable('cssls') -- css-lsp
+	'html', -- html-lsp
+	'cssls', -- css-lsp
 
-vim.lsp.enable('jsonls') -- json-lsp
-vim.lsp.enable('vtsls') -- vtsls
-vim.lsp.enable('vue_ls') -- vue-language-server
-vim.lsp.enable('eslint') -- eslint-lsp
+	'jsonls', -- json-lsp
+	'vtsls',  -- vtsls
+	'vue_ls', -- vue-language-server
+	'eslint', -- eslint-lsp
 
--- vim.lsp.enable('gopls')
-vim.lsp.enable('postgres_lsp') -- postgres-language-server
-vim.lsp.enable('powershell_es') -- powershell-editor-services
-vim.lsp.enable('pyright') -- pyright
+	-- 'gopls',
+	'postgres_lsp', -- postgres-language-server
+	'powershell_es', -- powershell-editor-services
+	'pyright', -- pyright
+})

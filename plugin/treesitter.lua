@@ -1,6 +1,6 @@
 vim.pack.add({
     'https://github.com/neovim-treesitter/treesitter-parser-registry',
-    { name = 'nvim-treesitter', src = 'https://github.com/neovim-treesitter/nvim-treesitter' },
+    { name = 'nvim-treesitter',    src = 'https://github.com/neovim-treesitter/nvim-treesitter' },
     { name = 'treesitter-context', src = 'https://github.com/nvim-treesitter/nvim-treesitter-context' }
 })
 

@@ -5,4 +5,3 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, { buf = ev.buf })
     end
 })
-

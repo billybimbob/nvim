@@ -5,7 +5,7 @@ local function has_ext(file_name, ext)
     return vim.fs.ext(file_name) == ext
 end
 
----@param bufnr integer 
+---@param bufnr integer
 ---@return string?
 local function root_sln(bufnr)
     local root_dir = vim.fs.root(bufnr, { '.git/', 'src/' })

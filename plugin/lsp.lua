@@ -34,6 +34,19 @@ vim.lsp.config('ts_ls', {
     filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
 })
 
+---@type vim.lsp.Config
+local roslyn_config = {
+    root_dir = function(bufnr, _)
+        local bufname = vim.api.nvim_buf_get_name(bufnr)
+        local root_dir = vim.fs.root(bufnr, function(fname, _)
+            return fname:match('%.sln[x]?$') ~= nil
+        end)
+        print('config info', bufname, root_dir)
+    end
+}
+
+vim.lsp.config('roslyn_ls', roslyn_config)
+
 vim.lsp.enable({
     'html', -- html-lsp
     'cssls', -- css-lsp

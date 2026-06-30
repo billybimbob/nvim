@@ -31,10 +31,10 @@ for i = 32, 126 do
 end
 
 ---@param event vim.api.keyset.create_autocmd.callback_args
-local function enable_autocomplete(event)
+local function attach_completion_highlights(event)
     local client = assert(vim.lsp.get_client_by_id(event.data.client_id))
 
-    if client:supports_method('textDocument/completion') then
+    if client:supports_method('textDocument/completion', event.buf) then
         vim.list_extend(client.server_capabilities.completionProvider.triggerCharacters, extra_triggers)
 
         vim.lsp.completion.enable(true, client.id, event.buf, {
@@ -44,8 +44,32 @@ local function enable_autocomplete(event)
             end
         })
     end
+
+    if client:supports_method('textDocument/documentHighlight', event.buf) then
+        local highlight_group = vim.api.nvim_create_augroup('lsp-highlighting', { clear = false })
+
+        vim.api.nvim_create_autocmd({'CursorHold', 'CursorHoldI' }, {
+            buffer = event.buf,
+            group = highlight_group,
+            callback = vim.lsp.buf.document_highlight
+        })
+
+        vim.api.nvim_create_autocmd({'CursorMoved', 'CursorMovedI' }, {
+            buffer = event.buf,
+            group = highlight_group,
+            callback = vim.lsp.buf.clear_references
+        })
+
+        vim.api.nvim_create_autocmd('LspDetach', {
+            group = vim.api.nvim_create_augroup('lsp-detach-cleanup', { clear = true }),
+            callback = function(ev)
+                vim.api.nvim_clear_autocmds({ group = highlight_group, buf = ev.buf })
+                vim.lsp.buf.clear_references()
+            end
+        })
+    end
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {
-    callback = enable_autocomplete
+    callback = attach_completion_highlights
 })

@@ -65,7 +65,6 @@ for i = 32, 126 do
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {
-    group = vim.api.nvim_create_augroup('custom.lsp', {}),
     callback = function(ev)
         local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
 

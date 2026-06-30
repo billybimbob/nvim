@@ -45,4 +45,6 @@ local function enable_autocomplete(event)
     end
 end
 
-vim.api.nvim_create_autocmd('LspAttach', { callback = enable_autocomplete })
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = enable_autocomplete
+})

@@ -2,56 +2,22 @@ vim.pack.add{
     'https://github.com/neovim/nvim-lspconfig'
 }
 
-vim.lsp.config('lua_ls', {
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { 'vim' }
-            },
-            workspace = {
-                library = vim.api.nvim_get_runtime_file('', true),
-                checkThirdParty = false
-            }
-        }
-    }
-})
-
-local vue_language_server_path = vim.fn.expand('$MASON\\packages\\vue-language-server\\node_modules\\@vue\\language-server')
-
-local vue_plugin = {
-    name = '@vue/typescript-plugin',
-    location = vue_language_server_path,
-    languages = { 'vue' },
-    configNamespace = 'typescript'
-}
-
-vim.lsp.config('ts_ls', {
-    init_options = {
-        plugins = {
-            vue_plugin,
-        }
-    },
-    filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-})
-
 vim.lsp.enable({
+    'lua_ls', -- lua-language-server
+    'postgres_lsp', -- postgres-language-server
+
     'html', -- html-lsp
     'cssls', -- css-lsp
     'jsonls', -- json-lsp
     'ts_ls',  -- typescript language server
+
     'eslint', -- eslint-lsp
-})
+    -- 'vue_ls', -- vue-language-server
 
--- vim.lsp.enable('vue_ls') -- vue-language-server
-
-vim.lsp.enable('lua_ls') -- lua-language-server
--- vim.lsp.enable('pyright')
--- vim.lsp.enable('gopls')
-vim.lsp.enable('postgres_lsp') -- postgres-language-server
-
-vim.lsp.enable({
     'roslyn_ls', -- roslyn-language-server
     'powershell_es', -- powershell-editor-services
+    -- 'pyright',
+    -- 'gopls',
 })
 
 vim.opt.completeopt = { "menuone", "noselect", "popup" }
@@ -64,20 +30,19 @@ for i = 32, 126 do
     end
 end
 
-vim.api.nvim_create_autocmd('LspAttach', {
-    callback = function(ev)
-        local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
+---@param event vim.api.keyset.create_autocmd.callback_args
+local function enable_autocomplete(event)
+    local client = assert(vim.lsp.get_client_by_id(event.data.client_id))
 
-        if client:supports_method('textDocument/completion') then
-            local triggers = assert(client.server_capabilities.completionProvider.triggerCharacters)
-            vim.list_extend(triggers, extra_triggers)
-
-            vim.lsp.completion.enable(true, client.id, ev.buf, {
-                autotrigger = true,
-                convert = function(item)
-                    return { abbr = item.label:gsub('%b()', '') }
-                end
-            })
-        end
+    if client:supports_method('textDocument/completion') then
+        vim.lsp.completion.enable(true, client.id, event.buf, {
+            autotrigger = true,
+            convert = function(item)
+                return { abbr = item.label:gsub('%b()', '') }
+            end
+        })
+        vim.list_extend(client.server_capabilities.completionProvider.triggerCharacters, extra_triggers)
     end
-})
+end
+
+vim.api.nvim_create_autocmd('LspAttach', { callback = enable_autocomplete })

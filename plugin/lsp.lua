@@ -35,13 +35,14 @@ local function enable_autocomplete(event)
     local client = assert(vim.lsp.get_client_by_id(event.data.client_id))
 
     if client:supports_method('textDocument/completion') then
+        vim.list_extend(client.server_capabilities.completionProvider.triggerCharacters, extra_triggers)
+
         vim.lsp.completion.enable(true, client.id, event.buf, {
             autotrigger = true,
             convert = function(item)
                 return { abbr = item.label:gsub('%b()', '') }
             end
         })
-        vim.list_extend(client.server_capabilities.completionProvider.triggerCharacters, extra_triggers)
     end
 end
 

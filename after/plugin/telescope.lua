@@ -1,14 +1,16 @@
 local builtin = require('telescope.builtin')
 
-vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>pg', builtin.live_grep, { desc = 'Telescope live grep' })
-vim.keymap.set('n', '<leader>pb', builtin.buffers, { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = 'Find files' })
+vim.keymap.set('n', '<leader>pg', builtin.live_grep, { desc = 'Live grep' })
+vim.keymap.set('n', '<leader>pb', builtin.buffers, { desc = 'Buffers' })
 
 vim.keymap.set('n', '<leader>ps', function()
     builtin.grep_string({ search = vim.fn.input('Grep > ') })
 end)
 
-vim.keymap.set('n', '<C-p>', builtin.git_files, { desc = 'Telescope git files' })
+vim.keymap.set('n', '<C-p>', builtin.git_files, { desc = 'git files' })
+vim.keymap.set('n', '<C-i><C-l>', builtin.git_commits, { desc = 'git commits' })
+vim.keymap.set('n', '<C-i><C-h>', builtin.git_stash, { desc = 'git stash' })
 
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(ev)

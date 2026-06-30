@@ -6,6 +6,10 @@ vim.pack.add({
     { name = 'telescope', src = 'https://github.com/nvim-telescope/telescope.nvim' },
 })
 
+-- other deps required for telescope (w/ windows):
+-- winget install sharkdp.fd
+-- winget install BurntSushi.ripgrep.MSVC
+
 require('telescope').setup({
     extensions = {
         ['ui-select'] = { require('telescope.themes').get_dropdown() }

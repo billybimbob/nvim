@@ -1,6 +1,6 @@
 local vim_runtime_path = vim.api.nvim_get_runtime_file('', true)
 
---@type vim.lsp.Config
+---@type vim.lsp.Config
 return {
     settings = {
         Lua = {

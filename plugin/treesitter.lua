@@ -1,7 +1,25 @@
 vim.pack.add({
     'https://github.com/neovim-treesitter/treesitter-parser-registry',
-    { name = 'nvim-treesitter',    src = 'https://github.com/neovim-treesitter/nvim-treesitter' },
     { name = 'treesitter-context', src = 'https://github.com/nvim-treesitter/nvim-treesitter-context' }
+})
+
+vim.api.nvim_create_autocmd('PackChanged', {
+    callback = function(ev)
+        if ev.data.spec.name ~= 'nvim.treesitter' then
+            return
+        end
+
+        local kind = ev.data.kind
+        if kind ~= 'install' and kind ~= 'update' then
+            return
+        end
+
+        vim.cmd('TSUpdate')
+    end
+})
+
+vim.pack.add({
+    { name = 'nvim-treesitter', src = 'https://github.com/neovim-treesitter/nvim-treesitter' }
 })
 
 local nvim_treesitter = require('nvim-treesitter')

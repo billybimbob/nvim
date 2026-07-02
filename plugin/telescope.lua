@@ -41,6 +41,22 @@ vim.pack.add({
 local telescope = require('telescope')
 
 telescope.setup({
+    defaults = {
+        path_display = { 'filename_first', 'truncate' },
+        dynamic_preview_title = true,
+        mappings = {
+            i = {
+                ['<C-u>'] = false,
+                ['<C-d>'] = false,
+                ['<C-f>'] = false,
+
+                ['<C-k>'] = 'preview_scrolling_up',
+                ['<C-j>'] = 'preview_scrolling_down',
+                ['<C-h>'] = 'preview_scrolling_left',
+                ['<C-l>'] = 'preview_scrolling_right',
+            }
+        }
+    },
     extensions = {
         ['ui-select'] = {
             require('telescope.themes').get_dropdown()

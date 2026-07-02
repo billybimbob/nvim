@@ -15,6 +15,7 @@ vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
+vim.opt.fileformats = 'dos,unix,mac'
 vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 

@@ -20,8 +20,6 @@ vim.lsp.enable({
     -- 'gopls',
 })
 
-vim.opt.completeopt = { "menuone", "noselect", "popup" }
-
 local extra_triggers = {}
 for i = 32, 126 do
     local s = string.char(i)
@@ -59,14 +57,6 @@ local function attach_lsp_modifiers(ev)
             group = highlight_group,
             callback = vim.lsp.buf.clear_references
         })
-
-        vim.api.nvim_create_autocmd('LspDetach', {
-            group = vim.api.nvim_create_augroup('lsp-detach-cleanup', { clear = true }),
-            callback = function(ev2)
-                vim.api.nvim_clear_autocmds({ group = highlight_group, buf = ev2.buf })
-                vim.lsp.buf.clear_references()
-            end
-        })
     end
 
     if client:supports_method('textDocument/formatting') and not client:supports_method('textDocument/willSaveWaitUntil') then
@@ -81,4 +71,11 @@ end
 
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = attach_lsp_modifiers
+})
+
+vim.api.nvim_create_autocmd('LspDetach', {
+    callback = function(ev)
+        vim.api.nvim_clear_autocmds({ group = 'lsp-highlighting', buf = ev.buf })
+        vim.lsp.buf.clear_references()
+    end
 })

@@ -16,8 +16,9 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 vim.opt.fileformats = 'dos,unix,mac'
+vim.opt.completeopt = 'menuone,noselect,popup'
 vim.opt.termguicolors = true
-vim.opt.scrolloff = 8
 
+vim.opt.scrolloff = 8
 vim.opt.signcolumn = 'yes'
 vim.opt.updatetime = 50

@@ -37,6 +37,7 @@ local extra_langs = {
     'typescript',
     'tsx',
     'vue',
+    'diff',
     'git_config',
     'git_rebase',
     'gitattributes',
@@ -60,7 +61,6 @@ local nvim_treesitter = require('nvim-treesitter')
 local nvim_treesitter_textobjects = require('nvim-treesitter-textobjects')
 
 nvim_treesitter.install(extra_langs)
-
 nvim_treesitter_textobjects.setup({
     lookahead = true
 })
@@ -82,7 +82,6 @@ end
 vim.keymap.set({ 'x', 'o' }, 'if', function()
     get_textobject_select().select_textobject('@function.inner', 'textobjects')
 end)
-
 vim.keymap.set({ 'x', 'o' }, 'af', function()
     get_textobject_select().select_textobject('@function.outer', 'textobjects')
 end)
@@ -90,7 +89,6 @@ end)
 vim.keymap.set({ 'x', 'o' }, 'im', function()
     get_textobject_select().select_textobject('@parameter.inner', 'textobjects')
 end)
-
 vim.keymap.set({ 'x', 'o' }, 'am', function()
     get_textobject_select().select_textobject('@parameter.outer', 'textobjects')
 end)

@@ -23,8 +23,12 @@ vim.pack.add({
     { name = 'nvim-treesitter', src = 'https://github.com/neovim-treesitter/nvim-treesitter' }
 })
 
-local nvim_treesitter = require('nvim-treesitter')
-local nvim_treesitter_textobjects = require('nvim-treesitter-textobjects')
+-- need to have a c complier to add the extra langs
+-- getting c on windows was... tough
+-- easiest way i have found was using a prebuilt version of winlibs:
+-- https://winlibs.com/
+-- 1. winget install BrechtSanders.WinLibs.POSIX.UCRT (this is on windows 11)
+-- 2. add CC = gcc in the path
 
 local extra_langs = {
     'html',
@@ -52,12 +56,8 @@ local extra_langs = {
     'editorconfig'
 }
 
--- need to have a c complier to add the extra langs
--- getting c on windows was... tough
--- easiest way i have found was using a prebuilt version of winlibs:
--- https://winlibs.com/
--- 1. winget install BrechtSanders.WinLibs.POSIX.UCRT (this is on windows 11)
--- 2. add CC = gcc in the path
+local nvim_treesitter = require('nvim-treesitter')
+local nvim_treesitter_textobjects = require('nvim-treesitter-textobjects')
 
 nvim_treesitter.install(extra_langs)
 

@@ -12,12 +12,12 @@ vim.lsp.enable({
     'ts_ls',        -- typescript language server
 
     'eslint',       -- eslint-lsp
-    -- 'vue_ls', -- vue-language-server
+    'vue_ls', -- vue-language-server
 
-    'roslyn_ls',     -- roslyn-language-server
-    'powershell_es', -- powershell-editor-services
-    -- 'pyright',
-    -- 'gopls',
+    -- 'roslyn_ls',     -- roslyn-language-server
+    -- 'powershell_es', -- powershell-editor-services
+    'pyright',
+    'gopls',
 })
 
 local extra_triggers = {}

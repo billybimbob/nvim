@@ -41,7 +41,7 @@ local extra_langs = {
     'git_config',
     'git_rebase',
     'gitattributes',
-    'gitcommit',
+    -- 'gitcommit',
     'gitignore',
     'go',
     'gomod',
@@ -51,8 +51,8 @@ local extra_langs = {
     'json',
     'yaml',
     'sql',
-    'c_sharp',
-    'powershell',
+    -- 'c_sharp',
+    -- 'powershell',
     'python',
     'editorconfig'
 }

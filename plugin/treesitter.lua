@@ -1,7 +1,7 @@
 vim.pack.add({
     'https://github.com/neovim-treesitter/treesitter-parser-registry',
-    { name = 'treesitter-context', src = 'https://github.com/nvim-treesitter/nvim-treesitter-context' },
-    'https://github.com/nvim-treesitter/nvim-treesitter-textobjects'
+    'https://github.com/nvim-treesitter/nvim-treesitter-context',
+    'https://github.com/nvim-treesitter/nvim-treesitter-textobjects',
 })
 
 vim.api.nvim_create_autocmd('PackChanged', {
@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd('PackChanged', {
 })
 
 vim.pack.add({
-    { name = 'nvim-treesitter', src = 'https://github.com/neovim-treesitter/nvim-treesitter' }
+    'https://github.com/neovim-treesitter/nvim-treesitter'
 })
 
 -- need to have a c complier to add the extra langs
@@ -57,11 +57,9 @@ local extra_langs = {
     'editorconfig'
 }
 
-local nvim_treesitter = require('nvim-treesitter')
-local nvim_treesitter_textobjects = require('nvim-treesitter-textobjects')
+require('nvim-treesitter').install(extra_langs)
 
-nvim_treesitter.install(extra_langs)
-nvim_treesitter_textobjects.setup({
+require('nvim-treesitter-textobjects').setup({
     lookahead = true
 })
 
@@ -74,21 +72,3 @@ vim.api.nvim_create_autocmd('FileType', {
         vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
     end
 })
-
-local function get_textobject_select()
-    return require('nvim-treesitter-textobjects.select')
-end
-
-vim.keymap.set({ 'x', 'o' }, 'if', function()
-    get_textobject_select().select_textobject('@function.inner', 'textobjects')
-end)
-vim.keymap.set({ 'x', 'o' }, 'af', function()
-    get_textobject_select().select_textobject('@function.outer', 'textobjects')
-end)
-
-vim.keymap.set({ 'x', 'o' }, 'im', function()
-    get_textobject_select().select_textobject('@parameter.inner', 'textobjects')
-end)
-vim.keymap.set({ 'x', 'o' }, 'am', function()
-    get_textobject_select().select_textobject('@parameter.outer', 'textobjects')
-end)

@@ -1,10 +1,3 @@
----@param file_name string
----@param ext string
----@return boolean
-local function has_ext(file_name, ext)
-    return vim.fs.ext(file_name) == ext
-end
-
 ---@param bufnr integer
 ---@return string?
 local function root_sln(bufnr)
@@ -13,7 +6,7 @@ local function root_sln(bufnr)
         return
     end
     return vim.fs.root(root_dir, function(fname)
-        return has_ext(fname, 'sln')
+        return vim.fs.ext(fname) == 'sln'
     end)
 end
 
@@ -27,7 +20,7 @@ local function find_root_dir(bufnr, on_dir)
     end
 
     local proj_dir = vim.fs.root(bufnr, function(fname)
-        return has_ext(fname, 'csproj')
+        return vim.fs.ext(fname) == 'csproj'
     end)
 
     if proj_dir then

@@ -67,6 +67,10 @@
     "vim-fugitive": {
       "rev": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0",
       "src": "https://github.com/tpope/vim-fugitive"
+    },
+    "vim-wordmotion": {
+      "rev": "81d9bd298376ab0dc465c85d55afa4cb8d5f47a1",
+      "src": "https://github.com/chaoren/vim-wordmotion.git"
     }
   }
 }

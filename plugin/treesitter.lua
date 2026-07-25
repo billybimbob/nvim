@@ -42,7 +42,13 @@ local extra_langs = {
 require('nvim-treesitter').install(extra_langs)
 
 require('nvim-treesitter-textobjects').setup({
-    lookahead = true
+    selection = {
+        lookahead = true,
+        include_surrounding_whitespace = false
+    },
+    move = {
+        set_jumps = true
+    }
 })
 
 vim.api.nvim_create_autocmd('FileType', {

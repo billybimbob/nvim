@@ -20,20 +20,17 @@ vim.lsp.enable({
     -- 'gopls',
 })
 
-local extra_triggers = {}
-for i = 32, 126 do
-    local s = string.char(i)
-    if s:match('[_%a]$') then
-        table.insert(extra_triggers, s)
-    end
-end
-
 ---@param ev vim.api.keyset.create_autocmd.callback_args
 local function attach_lsp_modifiers(ev)
     local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
 
     if client:supports_method('textDocument/completion', ev.buf) then
-        vim.list_extend(client.server_capabilities.completionProvider.triggerCharacters, extra_triggers)
+        local all_triggers = {}
+        for i = 32, 126 do
+            table.insert(all_triggers, string.char(i))
+        end
+
+        client.server_capabilities.completionProvider.triggerCharacters = all_triggers
 
         vim.lsp.completion.enable(true, client.id, ev.buf, {
             autotrigger = true,

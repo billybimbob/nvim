@@ -12,6 +12,7 @@ vim.pack.add({
 })
 
 local telescope = require('telescope')
+local actions = require('telescope.actions')
 
 telescope.setup({
     defaults = {
@@ -27,6 +28,17 @@ telescope.setup({
                 ['<C-j>'] = 'preview_scrolling_down',
                 ['<C-h>'] = 'preview_scrolling_left',
                 ['<C-l>'] = 'preview_scrolling_right',
+
+                ['<esc>'] = actions.close,
+            }
+        }
+    },
+    pickers = {
+        buffers = {
+            mappings = {
+                i = {
+                    ['<C-d>'] = actions.delete_buffer + actions.move_to_top
+                }
             }
         }
     },

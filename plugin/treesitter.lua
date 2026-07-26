@@ -1,34 +1,16 @@
-vim.pack.add({
-    'https://github.com/neovim-treesitter/treesitter-parser-registry',
-    'https://github.com/nvim-treesitter/nvim-treesitter-context',
-    'https://github.com/nvim-treesitter/nvim-treesitter-textobjects',
-})
-
-vim.api.nvim_create_autocmd('PackChanged', {
-    callback = function(ev)
-        if ev.data.spec.name ~= 'nvim.treesitter' then
-            return
-        end
-
-        local kind = ev.data.kind
-        if kind ~= 'install' and kind ~= 'update' then
-            return
-        end
-
-        vim.cmd('TSUpdate')
-    end
-})
-
-vim.pack.add({
-    'https://github.com/neovim-treesitter/nvim-treesitter'
-})
-
 -- need to have a c complier to add the extra langs
 -- getting c on windows was... tough
 -- easiest way i have found was using a prebuilt version of winlibs:
 -- https://winlibs.com/
 -- 1. winget install BrechtSanders.WinLibs.POSIX.UCRT (this is on windows 11)
 -- 2. add CC = gcc in the path
+
+vim.pack.add({
+    'https://github.com/neovim-treesitter/treesitter-parser-registry',
+    'https://github.com/neovim-treesitter/nvim-treesitter',
+    'https://github.com/nvim-treesitter/nvim-treesitter-context',
+    'https://github.com/nvim-treesitter/nvim-treesitter-textobjects'
+})
 
 local extra_langs = {
     'html',
@@ -60,7 +42,13 @@ local extra_langs = {
 require('nvim-treesitter').install(extra_langs)
 
 require('nvim-treesitter-textobjects').setup({
-    lookahead = true
+    selection = {
+        lookahead = true,
+        include_surrounding_whitespace = false
+    },
+    move = {
+        set_jumps = true
+    }
 })
 
 vim.api.nvim_create_autocmd('FileType', {

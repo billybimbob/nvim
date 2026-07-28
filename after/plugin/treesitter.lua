@@ -40,10 +40,10 @@ vim.keymap.set({ "n", "x", "o" }, "[M", function()
 end)
 
 vim.keymap.set({ "n", "x", "o" }, "]f", function()
-    ts_move.goto_next_start("@function.outer", "textobjects")
+    ts_move.goto_next_start("@conditional.outer", "textobjects")
 end)
 vim.keymap.set({ "n", "x", "o" }, "[f", function()
-    ts_move.goto_previous_start("@function.outer", "textobjects")
+    ts_move.goto_previous_start("@conditional.outer", "textobjects")
 end)
 
 vim.keymap.set({ "n", "x", "o" }, "]F", function()

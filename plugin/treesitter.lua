@@ -6,8 +6,7 @@
 -- 2. add CC = gcc in the path
 
 vim.pack.add({
-    'https://github.com/neovim-treesitter/treesitter-parser-registry',
-    'https://github.com/neovim-treesitter/nvim-treesitter',
+    'https://github.com/nvim-treesitter/nvim-treesitter',
     'https://github.com/nvim-treesitter/nvim-treesitter-context',
     'https://github.com/nvim-treesitter/nvim-treesitter-textobjects'
 })
@@ -55,8 +54,6 @@ vim.api.nvim_create_autocmd('FileType', {
     pattern = extra_langs,
     callback = function()
         vim.treesitter.start()
-        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-        vim.wo.foldmethod = 'expr'
         vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
     end
 })

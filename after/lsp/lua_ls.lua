@@ -37,10 +37,11 @@ local function init_neovim_settings(client)
 
     config_settings.Lua = vim.tbl_deep_extend('force', config_settings.Lua, neovim_settings.Lua)
 end
----
+
 ---@type vim.lsp.Config
 return {
     on_init = init_neovim_settings,
+    ---@type lspconfig.settings.lua_ls
     settings = {
         Lua = {}
     },

@@ -12,7 +12,7 @@ vim.lsp.enable({
     'ts_ls',        -- typescript language server
 
     'eslint',       -- eslint-lsp
-    -- 'vue_ls', -- vue-language-server
+    -- 'vue_ls',       -- vue-language-server
 
     'roslyn_ls',     -- roslyn-language-server
     'powershell_es', -- powershell-editor-services
@@ -57,16 +57,30 @@ local function attach_lsp_modifiers(ev)
     end
 
     if client:supports_method('textDocument/formatting') and not client:supports_method('textDocument/willSaveWaitUntil') then
+        local eslint_group = vim.api.nvim_create_augroup('eslint-on-save', { clear = false })
+        local eslint_formatters = vim.api.nvim_get_autocmds({ event = 'BufWritePre', group = eslint_group })
+
+        if #eslint_formatters == 0 then
+            local format_group = vim.api.nvim_create_augroup('lsp-format-on-save', { clear = false })
+            vim.api.nvim_create_autocmd('BufWritePre', {
+                buffer = ev.buf,
+                group = format_group,
+                callback = function()
+                    vim.lsp.buf.format({ bufnr = ev.buf, id = client.id, timeout_ms = 1000 })
+                end
+            })
+        end
+    end
+
+    if client.name == 'eslint' then
+        local eslint_group = vim.api.nvim_create_augroup('eslint-on-save', { clear = false })
         local format_group = vim.api.nvim_create_augroup('lsp-format-on-save', { clear = false })
 
-        vim.api.nvim_clear_autocmds({ group = format_group, buf = ev.buf })
-
+        vim.api.nvim_clear_autocmds({ event = 'BufWritePre', group = format_group })
         vim.api.nvim_create_autocmd('BufWritePre', {
             buffer = ev.buf,
-            group = format_group,
-            callback = function()
-                vim.lsp.buf.format({ bufnr = ev.buf, id = client.id, timeout_ms = 1000 })
-            end
+            group = eslint_group,
+            command = 'LspEslintFixAll'
         })
     end
 end

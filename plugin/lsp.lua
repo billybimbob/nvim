@@ -57,8 +57,13 @@ local function attach_lsp_modifiers(ev)
     end
 
     if client:supports_method('textDocument/formatting') and not client:supports_method('textDocument/willSaveWaitUntil') then
+        local format_group = vim.api.nvim_create_augroup('lsp-format-on-save', { clear = false })
+
+        vim.api.nvim_clear_autocmds({ group = format_group, buf = ev.buf })
+
         vim.api.nvim_create_autocmd('BufWritePre', {
             buffer = ev.buf,
+            group = format_group,
             callback = function()
                 vim.lsp.buf.format({ bufnr = ev.buf, id = client.id, timeout_ms = 1000 })
             end

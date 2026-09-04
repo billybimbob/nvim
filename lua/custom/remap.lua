@@ -15,6 +15,8 @@ vim.keymap.set('x', '<leader>p', '"_dP')
 vim.keymap.set('n', '<leader>d', '"_d')
 vim.keymap.set('v', '<leader>d', '"_d')
 
+vim.keymap.set("n", "<C-k>", "<C-u>zz")
+vim.keymap.set("n", "<C-j>", "<C-d>zz")
 vim.keymap.set('n', 'Q', '<nop>')
 
 vim.api.nvim_create_autocmd('TextYankPost', {

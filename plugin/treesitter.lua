@@ -32,8 +32,8 @@ local extra_langs = {
     'json',
     'yaml',
     'sql',
-    -- 'c_sharp',
-    -- 'powershell',
+    'c_sharp',
+    'powershell',
     'python',
     'editorconfig'
 }

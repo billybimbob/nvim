@@ -91,7 +91,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 vim.api.nvim_create_autocmd('LspDetach', {
     callback = function(ev)
-        vim.api.nvim_clear_autocmds({ group = 'lsp-highlighting', buf = ev.buf })
+        local highlight_group = vim.api.nvim_create_augroup('lsp-highlighting', { clear = false })
+        vim.api.nvim_clear_autocmds({ group = highlight_group, buf = ev.buf })
         vim.lsp.buf.clear_references()
     end
 })

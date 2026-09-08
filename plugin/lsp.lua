@@ -41,30 +41,36 @@ local function attach_lsp_modifiers(ev)
     end
 
     if client:supports_method('textDocument/documentHighlight', ev.buf) then
-        local highlight_group = vim.api.nvim_create_augroup('lsp-highlighting', { clear = false })
+        local lsp_highlight = vim.api.nvim_create_augroup('lsp-highlighting', { clear = false })
 
         vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-            buffer = ev.buf,
-            group = highlight_group,
+            group = lsp_highlight,
+            buf = ev.buf,
             callback = vim.lsp.buf.document_highlight
         })
 
         vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-            buffer = ev.buf,
-            group = highlight_group,
+            group = lsp_highlight,
+            buf = ev.buf,
             callback = vim.lsp.buf.clear_references
         })
     end
 
     if client:supports_method('textDocument/formatting') and not client:supports_method('textDocument/willSaveWaitUntil') then
-        local eslint_group = vim.api.nvim_create_augroup('eslint-on-save', { clear = false })
-        local eslint_formatters = vim.api.nvim_get_autocmds({ event = 'BufWritePre', group = eslint_group })
+        local eslint_format = vim.api.nvim_create_augroup('eslint-on-save', { clear = false })
+
+        local eslint_formatters = vim.api.nvim_get_autocmds({
+            event = 'BufWritePre',
+            group = eslint_format,
+            buf = ev.buf
+        })
 
         if #eslint_formatters == 0 then
-            local format_group = vim.api.nvim_create_augroup('lsp-format-on-save', { clear = false })
+            local lsp_format = vim.api.nvim_create_augroup('lsp-format-on-save', { clear = false })
+
             vim.api.nvim_create_autocmd('BufWritePre', {
-                buffer = ev.buf,
-                group = format_group,
+                group = lsp_format,
+                buf = ev.buf,
                 callback = function()
                     vim.lsp.buf.format({ bufnr = ev.buf, id = client.id, timeout_ms = 1000 })
                 end
@@ -73,14 +79,19 @@ local function attach_lsp_modifiers(ev)
     end
 
     if client.name == 'eslint' then
-        local eslint_group = vim.api.nvim_create_augroup('eslint-on-save', { clear = false })
-        local format_group = vim.api.nvim_create_augroup('lsp-format-on-save', { clear = false })
+        local eslint_format = vim.api.nvim_create_augroup('eslint-on-save', { clear = false })
+        local lsp_format = vim.api.nvim_create_augroup('lsp-format-on-save', { clear = false })
 
-        vim.api.nvim_clear_autocmds({ event = 'BufWritePre', group = format_group })
         vim.api.nvim_create_autocmd('BufWritePre', {
-            buffer = ev.buf,
-            group = eslint_group,
+            group = eslint_format,
+            buf = ev.buf,
             command = 'LspEslintFixAll'
+        })
+
+        vim.api.nvim_clear_autocmds({
+            event = 'BufWritePre',
+            group = lsp_format,
+            buf = ev.buf
         })
     end
 end

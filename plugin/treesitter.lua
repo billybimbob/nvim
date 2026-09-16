@@ -12,37 +12,62 @@ vim.pack.add({
 })
 
 local extra_langs = {
-    'markdown',
-    'markdown_inline',
     'html',
     'css',
-    'scss',
-    'typescript',
-    'tsx',
-    'vue',
+    'javascript',
+    'jsdoc',
+    'json',
+    'yaml',
+    'markdown',
+    'markdown_inline',
     'diff',
-    'dockerfile',
+    'sql',
+    'editorconfig',
+}
+
+---@param cmd string
+---@param langs table<string>
+---@return boolean
+local function add_lang(cmd, langs)
+    if vim.fn.executable(cmd) == 0 then
+        return false
+    end
+    vim.list_extend(extra_langs, langs)
+    return true
+end
+
+add_lang('git', {
     'git_config',
     'git_rebase',
     'gitattributes',
     'gitcommit',
     'gitignore',
+})
+
+add_lang('node', {
+    'scss',
+    'typescript',
+    'tsx',
+    'vue',
+})
+
+add_lang('go', {
     'go',
     'gomod',
     'gosum',
     'gotmpl',
     'gowork',
-    'json',
-    'yaml',
-    'sql',
-    'c_sharp',
-    'powershell',
-    'python',
-    'editorconfig'
-}
+})
+
+add_lang('docker', { 'dockerfile' })
+add_lang('dotnet', { 'c_sharp' })
+add_lang('pwsh', { 'powershell' })
+
+if not add_lang('python3', { 'python' }) then
+    add_lang('python', { 'python' })
+end
 
 require('nvim-treesitter').install(extra_langs)
-
 require('nvim-treesitter-textobjects').setup({
     selection = {
         lookahead = true,

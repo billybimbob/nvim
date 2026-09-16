@@ -2,24 +2,6 @@ vim.pack.add {
     'https://github.com/neovim/nvim-lspconfig'
 }
 
-vim.lsp.enable({
-    'lua_ls',        -- lua-language-server
-    'postgres_lsp',  -- postgres-language-server
-
-    'html',          -- html-lsp
-    'cssls',         -- css-lsp
-    'jsonls',        -- json-lsp
-    'ts_ls',         -- typescript language server
-
-    'eslint',        -- eslint-lsp
-    'vue_ls',        -- vue-language-server
-
-    'roslyn_ls',     -- roslyn-language-server
-    'powershell_es', -- powershell-editor-services
-    'pyright',
-    'gopls',
-})
-
 ---@param ev vim.api.keyset.create_autocmd.callback_args
 local function attach_lsp_modifiers(ev)
     local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))

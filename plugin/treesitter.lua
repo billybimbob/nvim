@@ -23,6 +23,7 @@ local extra_langs = {
     'diff',
     'sql',
     'editorconfig',
+    'regex',
 }
 
 ---@param cmd string

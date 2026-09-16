@@ -14,19 +14,19 @@ vim.keymap.set('n', '<C-i><C-l>', builtin.git_commits, { desc = 'git commits' })
 vim.keymap.set('n', '<C-i><C-h>', builtin.git_stash, { desc = 'git stash' })
 vim.keymap.set('n', '<C-i><C-p>', builtin.git_branches, { desc = 'git branches' })
 
----@param event vim.api.keyset.create_autocmd.callback_args
-local function attach_lsp_telescope(event)
-    vim.keymap.set('n', 'gO', builtin.lsp_document_symbols, { buffer = event.buf, desc = 'Open Document Symbols' })
-    vim.keymap.set('n', 'grr', builtin.lsp_references, { buffer = event.buf, desc = '[G]oto [R]eferences' })
+---@param ev vim.api.keyset.create_autocmd.callback_args
+local function attach_lsp_telescope(ev)
+    vim.keymap.set('n', 'gO', builtin.lsp_document_symbols, { buf = ev.buf, desc = 'Open Document Symbols' })
+    vim.keymap.set('n', 'grr', builtin.lsp_references, { buf = ev.buf, desc = '[G]oto [R]eferences' })
 
-    vim.keymap.set('n', 'gri', builtin.lsp_implementations, { buffer = event.buf, desc = '[G]oto [I]mplementation' })
-    vim.keymap.set('n', 'gi', builtin.lsp_implementations, { buffer = event.buf })
+    vim.keymap.set('n', 'gri', builtin.lsp_implementations, { buf = ev.buf, desc = '[G]oto [I]mplementation' })
+    vim.keymap.set('n', 'gi', builtin.lsp_implementations, { buf = ev.buf })
 
-    vim.keymap.set('n', 'grd', builtin.lsp_definitions, { buffer = event.buf, desc = '[G]oto [D]efinition' })
-    vim.keymap.set('n', 'gd', builtin.lsp_definitions, { buffer = event.buf })
+    vim.keymap.set('n', 'grd', builtin.lsp_definitions, { buf = ev.buf, desc = '[G]oto [D]efinition' })
+    vim.keymap.set('n', 'gd', builtin.lsp_definitions, { buf = ev.buf })
 
-    vim.keymap.set('n', 'grt', builtin.lsp_type_definitions, { buffer = event.buf, desc = '[G]oto [T]ype Definition' })
-    vim.keymap.set('n', 'gt', builtin.lsp_type_definitions, { buffer = event.buf })
+    vim.keymap.set('n', 'grt', builtin.lsp_type_definitions, { buf = ev.buf, desc = '[G]oto [T]ype Definition' })
+    vim.keymap.set('n', 'gt', builtin.lsp_type_definitions, { buf = ev.buf })
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {

@@ -5,7 +5,8 @@ vim.pack.add({
 
 local servers = {
     'lua_ls',
-    'postgres_lsp'
+    'postgres_lsp',
+    'marksman',
 }
 
 ---@param cmd string
@@ -18,6 +19,10 @@ local function add_server(cmd, lsps)
     vim.list_extend(servers, lsps)
     return true
 end
+
+add_server('docker', { 'dockerls' })
+add_server('systemctl', { 'systemd_lsp' })
+add_server('bash', { 'bashls' })
 
 add_server('dotnet', { 'roslyn_ls' })
 add_server('pwsh', { 'powershell_es' })

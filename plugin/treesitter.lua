@@ -12,6 +12,8 @@ vim.pack.add({
 })
 
 local extra_langs = {
+    'markdown',
+    'markdown_inline',
     'html',
     'css',
     'scss',
@@ -19,6 +21,7 @@ local extra_langs = {
     'tsx',
     'vue',
     'diff',
+    'dockerfile',
     'git_config',
     'git_rebase',
     'gitattributes',

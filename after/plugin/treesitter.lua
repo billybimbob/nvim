@@ -70,3 +70,26 @@ vim.keymap.set({ 'n', 'x', 'o' }, 'f', ts_repeat_move.builtin_f_expr, { expr = t
 vim.keymap.set({ 'n', 'x', 'o' }, 'F', ts_repeat_move.builtin_F_expr, { expr = true })
 vim.keymap.set({ 'n', 'x', 'o' }, 't', ts_repeat_move.builtin_t_expr, { expr = true })
 vim.keymap.set({ 'n', 'x', 'o' }, 'T', ts_repeat_move.builtin_T_expr, { expr = true })
+
+-- copying from textobjects, idk how to reference that type
+---@class TSTextObjects.MoveOpts
+---@field forward boolean
+
+---@param opts TSTextObjects.MoveOpts
+local function diagnostic_jump(opts)
+    if opts.forward then
+        vim.diagnostic.jump({ count = 1, wrap = false })
+    else
+        vim.diagnostic.jump({ count = -1, wrap = false })
+    end
+end
+
+---@type fun(opts: TSTextObjects.MoveOpts)
+local diagnostic_move = ts_repeat_move.make_repeatable_move(diagnostic_jump)
+
+vim.keymap.set({ 'n', 'x', 'o' }, ']d', function()
+    diagnostic_move({ forward = true })
+end)
+vim.keymap.set({ 'n', 'x', 'o' }, '[d', function()
+    diagnostic_move({ forward = false })
+end)

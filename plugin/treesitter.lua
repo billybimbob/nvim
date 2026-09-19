@@ -23,6 +23,7 @@ local extra_langs = {
     'diff',
     'sql',
     'editorconfig',
+    'regex',
 }
 
 ---@param cmd string
@@ -59,6 +60,7 @@ add_lang('go', {
     'gowork',
 })
 
+add_lang('bash', { 'bash' })
 add_lang('docker', { 'dockerfile' })
 add_lang('dotnet', { 'c_sharp' })
 add_lang('pwsh', { 'powershell' })

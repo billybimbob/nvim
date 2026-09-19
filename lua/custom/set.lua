@@ -16,8 +16,13 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 vim.opt.fileformats = 'dos,unix,mac'
-vim.opt.completeopt = 'menuone,noselect,popup'
+vim.opt.completeopt = 'menuone,noselect,popup,fuzzy'
 vim.opt.termguicolors = true
+
+vim.opt.winborder = 'rounded'
+vim.opt.pumborder = 'rounded'
+vim.opt.pumheight = 10
+vim.opt.pummaxwidth = 100
 
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = 'yes'

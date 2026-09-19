@@ -9,6 +9,7 @@ The plugins shell out to these. Neovim installs none of them.
 | Needed by | Dependency |
 | --- | --- |
 | nvim-treesitter | [tree-sitter CLI](https://github.com/tree-sitter/tree-sitter/blob/master/crates/cli/README.md) |
+| nvim-treesitter | node |
 | nvim-treesitter | C compiler |
 | telescope-fzf-native | C compiler |
 | telescope | ripgrep |
@@ -18,7 +19,6 @@ The plugins shell out to these. Neovim installs none of them.
 ### Windows (winget)
 
 ```powershell
-winget install Git.Git
 winget install BurntSushi.ripgrep.MSVC
 winget install sharkdp.fd
 winget install BrechtSanders.WinLibs.POSIX.UCRT

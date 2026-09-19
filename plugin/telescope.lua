@@ -1,8 +1,3 @@
--- other deps required for telescope (w/ windows):
--- c (using winlibs) for make, also freaking windows
--- winget install sharkdp.fd
--- winget install BurntSushi.ripgrep.MSVC
-
 vim.pack.add({
     'https://github.com/nvim-lua/plenary.nvim',
     -- 'https://github.com/nvim-tree/nvim-web-devicons',

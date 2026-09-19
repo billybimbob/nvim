@@ -18,7 +18,6 @@ The plugins shell out to these. Neovim installs none of them.
 ### Windows (winget)
 
 ```powershell
-winget install Git.Git
 winget install BurntSushi.ripgrep.MSVC
 winget install sharkdp.fd
 winget install BrechtSanders.WinLibs.POSIX.UCRT

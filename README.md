@@ -8,7 +8,7 @@ The plugins shell out to these. Neovim installs none of them.
 
 | Needed by | Dependency |
 | --- | --- |
-| nvim-treesitter | tree-sitter CLI |
+| nvim-treesitter | [tree-sitter CLI](https://github.com/tree-sitter/tree-sitter/blob/master/crates/cli/README.md) |
 | nvim-treesitter | C compiler |
 | telescope-fzf-native | C compiler |
 | telescope | ripgrep |
@@ -19,14 +19,14 @@ The plugins shell out to these. Neovim installs none of them.
 
 ```powershell
 winget install Git.Git
-winget install tree-sitter.tree-sitter-cli
 winget install BurntSushi.ripgrep.MSVC
 winget install sharkdp.fd
-winget install BrechtSanders.WinLibs.POSIX.UCRT   # gcc + mingw32-make
+winget install BrechtSanders.WinLibs.POSIX.UCRT
 ```
 
 ### Debian / Ubuntu (apt)
 
 ```bash
-apt install build-essential ripgrep fd-find
+sudo apt install build-essential
+sudo apt install ripgrep fd-find
 ```

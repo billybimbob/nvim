@@ -6,11 +6,6 @@ vim.pack.add {
 local function attach_lsp_modifiers(ev)
     local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
 
-    vim.keymap.set('n', 'gh', vim.lsp.buf.hover, { buf = ev.buf })
-    vim.keymap.set('n', '<leader>gh', vim.diagnostic.open_float, { buf = ev.buf })
-    vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, { buf = ev.buf })
-    vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { buf = ev.buf })
-
     if client:supports_method('textDocument/completion', ev.buf) then
         vim.lsp.completion.enable(true, client.id, ev.buf, {
             autotrigger = true,

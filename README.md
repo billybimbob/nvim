@@ -6,14 +6,14 @@ A Neovim configuration the way I like it, trying to use as many of the builtin N
 
 The plugins shell out to these. Neovim installs none of them.
 
-| Needed by | Dependency
-| --- | --- | --- |
+| Needed by | Dependency |
+| --- | --- |
 | nvim-treesitter | tree-sitter CLI |
 | nvim-treesitter | C compiler |
 | telescope-fzf-native | C compiler |
 | telescope | ripgrep |
 | telescope | fd |
-| nvim-web-devicons | a [Nerd Font](https://www.nerdfonts.com/) |
+| nvim-web-devicons | [a Nerd Font](https://www.nerdfonts.com/) |
 
 ### Windows (winget)
 

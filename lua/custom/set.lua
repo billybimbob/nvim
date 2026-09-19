@@ -16,7 +16,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 vim.opt.fileformats = 'dos,unix,mac'
-vim.opt.completeopt = 'menuone,noselect,popup'
+vim.opt.completeopt = 'menuone,noselect,popup,fuzzy'
 vim.opt.termguicolors = true
 
 vim.opt.winborder = 'rounded'

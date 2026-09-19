@@ -13,6 +13,7 @@ local function attach_lsp_modifiers(ev)
 
     if client:supports_method('textDocument/completion', ev.buf) then
         vim.lsp.completion.enable(true, client.id, ev.buf, {
+            autotrigger = true,
             convert = function(item)
                 return { abbr = item.label:gsub('%b()', '') }
             end

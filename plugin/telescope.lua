@@ -8,6 +8,7 @@ vim.pack.add({
 
 local telescope = require('telescope')
 local actions = require('telescope.actions')
+local themes = require('telescope.themes')
 
 telescope.setup({
     defaults = {
@@ -38,9 +39,10 @@ telescope.setup({
         }
     },
     extensions = {
+        fzf = {},
         ['ui-select'] = {
-            require('telescope.themes').get_dropdown()
-        }
+            themes.get_dropdown({})
+        },
     }
 })
 

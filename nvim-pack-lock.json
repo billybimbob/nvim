@@ -1,7 +1,7 @@
 {
   "plugins": {
     "gitsigns": {
-      "rev": "fd780920613e541cbdfac41bf711583ed49f9249",
+      "rev": "ef707fb93301a9b856f36eae4c8f56f5b988a794",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "guess-indent": {
@@ -13,15 +13,15 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mason-lspconfig": {
-      "rev": "00b5473cca4db5b410ff4bae724e3b6e21f2687f",
+      "rev": "97ccf96bb2e7adb5f82975068bd4c7307d2afa8a",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
     },
     "nvim-lspconfig": {
-      "rev": "ac062d0d01c019c0dbdb798968f3e5d8b35c3853",
+      "rev": "443d92c6bea761ab54cdde46fb197a2b4d614bdd",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
-      "rev": "ca581c3436fc2b236847f5b739ebc263739e5ca6",
+      "rev": "19bdfc04f40ed2ccb3340591d125f759b0406875",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-context": {
@@ -33,7 +33,7 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
     },
     "nvim-web-devicons": {
-      "rev": "ec309a0eaff6ea967e58c275996155ab5c16938d",
+      "rev": "0dc0cfb0c6858041174a53c7aa4adaf65e994b3c",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "plenary.nvim": {
@@ -49,7 +49,7 @@
       "src": "https://github.com/sainnhe/sonokai"
     },
     "telescope": {
-      "rev": "40aedd8a68c78a656a10a8d62d80c54af59420fb",
+      "rev": "1e1bab730218eaf97fce743be3f56e51075928ac",
       "src": "https://github.com/nvim-telescope/telescope.nvim"
     },
     "telescope-fzf-native.nvim": {
@@ -61,7 +61,7 @@
       "src": "https://github.com/nvim-telescope/telescope-ui-select.nvim"
     },
     "tokyodark": {
-      "rev": "659aff3c73dc2e0159314050a81671f0b2eaad01",
+      "rev": "d641d15fd1007649d1a9b35876ae05a2e1bde1df",
       "src": "https://github.com/tiagovla/tokyodark.nvim"
     },
     "vim-fugitive": {
@@ -69,7 +69,7 @@
       "src": "https://github.com/tpope/vim-fugitive"
     },
     "vim-wordmotion": {
-      "rev": "81d9bd298376ab0dc465c85d55afa4cb8d5f47a1",
+      "rev": "8e7f88d724f333b695d945139b3327d82d5d76be",
       "src": "https://github.com/chaoren/vim-wordmotion.git"
     }
   }
